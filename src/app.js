@@ -11,8 +11,6 @@ import {
 // second minute hour day-of-month month day-of-week
 cron.schedule('0 59 23 * * *', async function() {
 	const data = await axios.post('http://hmkting.synology.me:3001/api/setLastRank');
-	console.log(data);
-	console.log('작업완료');
 });
 
 const app = express();

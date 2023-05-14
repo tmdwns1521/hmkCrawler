@@ -1,11 +1,19 @@
 import cors from 'cors';
 import express from 'express';
+import cron from 'node-cron';
+import axios from 'axios';
 import {
 	viewsRouter,
-	consultingRouter,
-	userRouter,
 	visitorRouter
 } from './routers/index.js';
+
+
+// second minute hour day-of-month month day-of-week
+cron.schedule('0 50 23 * * *', async function() {
+	await axios.post('/api/setLastRank');
+	console.log('작업완료');
+});
+
 const app = express();
 
 // CORS 에러 방지
@@ -20,8 +28,6 @@ app.use(express.urlencoded({ extended: false }));
 // html, css, js 라우팅
 app.use(viewsRouter);
 
-app.use('/api', consultingRouter);
-app.use('/api', userRouter);
 app.use('/api', visitorRouter);
 
 export { app };

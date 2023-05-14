@@ -9,7 +9,7 @@ import {
 
 
 // second minute hour day-of-month month day-of-week
-cron.schedule('0 50 23 * * *', async function() {
+cron.schedule('0 52 23 * * *', async function() {
 	await axios.post('/api/setLastRank');
 	console.log('작업완료');
 });

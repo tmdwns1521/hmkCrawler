@@ -33,7 +33,7 @@ visitorRouter.post('/getPlace', async (req, res, next) => {
 		OneMonth = today.toISOString().split('T')[0];
 		console.log(now)
 		console.log(OneMonth)
-		const sql = `select cr.*, crd.rank, crd.rate, crd.ids, crd.keyword, crd.created_at from company_ranking cr left join company_ranking_data crd on cr.company_code = crd.code and cr.keywords = crd.keyword where cr.status = ? and crd.created_at BETWEEN "${OneMonth} 00:00:00" AND "${now} 23:59:59" order by crd.ids desc`;
+		const sql = `select cr.*, crd.rank, crd.rate, crd.ids, crd.keyword, crd.created_at from company_ranking cr left join company_ranking_data crd on cr.company_code = crd.code and cr.keywords = crd.keyword where cr.status = ? and crd.created_at BETWEEN "${OneMonth} 00:00:00" AND "${now} 23:59:59" order by crd.ids asc`;
 		console.log(sql);
 		const datas = await mysqlRead.query(sql, [ status ]);
 		res.status(201).json(datas[0]);

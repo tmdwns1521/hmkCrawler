@@ -61,48 +61,62 @@ h1{
   th:nth-child(1) {
     position: sticky;
     left: 0;
-    width: 100px;
+    width: 55px;
   }
   th:nth-child(2) {
     position: sticky;
     left: 0;
-    width: 50px;
+    width: 110px;
   }
-  th:nth-child(3), th:nth-child(6), th:nth-child(7) {
+  th:nth-child(6), th:nth-child(7) {
     position: sticky;
     left: 0;
-    width: 80px;
+    width: 60px;
+  }
+  th:nth-child(3) {
+    position: sticky;
+    width: 100px;
+    left: 0;
+    z-index: 99;
   }
   th:nth-child(4) {
     position: sticky;
-    left: 0;
-    z-index: 1;
+    left: 130px;
     width: 100px;
+    z-index: 99;
   }
   th:nth-child(5) {
-    position: sticky;
-    left: 130px;
-    z-index: 1;
     width: 120px;
+    z-index: 1;
+  }
+  td:nth-child(3) {
+    position: sticky;
+    left: 0;
+    z-index: 1;
   }
   td:nth-child(4) {
     position: sticky;
-    left: 0;
+    left: 130px;
     width: 100px;
+    z-index: 1;
   }
   td:nth-child(5) {
     position: sticky;
-    left: 130px;
+    left: 0;
     width: 120px;
   }
-  th:nth-child(8) {
+  th:nth-child(7) {
     position: sticky;
-    left: 0;
+    left: 260px;
     width: 90px;
     border-right: solid 1px white;
+    z-index: 99;
   }
-  td:nth-child(8) {
+  td:nth-child(7) {
+    position: sticky;
     border-right: solid 1px white;
+    z-index: 1;
+    left: 260px;
   }
   
   

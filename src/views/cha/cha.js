@@ -8,14 +8,13 @@ window.onload = async function () {
     const query = {
         status: status,
     }
-    // let postData = await Api.post('http://localhost:3001/api/getPlace', query);
-    let postData = await Api.post('http://hmkting.synology.me:3001/api/getPlace', query);
+    let postData = await Api.post('http://localhost:3001/api/getPlace', query);
+    // let postData = await Api.post('http://hmkting.synology.me:3001/api/getPlace', query);
     console.log(postData)
     postData = await postData.reduce((prev, next) => {
         let key = next['id']
         if (!prev[key]) {
             prev[key] = {}
-            prev[key]['kakaotalk_name'] = next['kakaotalk_name']
             prev[key]['guaranteed_rank'] = next['guaranteed_rank']
             prev[key]['company_name'] = next['company_name']
             prev[key]['company_number'] = next['company_number']
@@ -41,14 +40,13 @@ window.onload = async function () {
             dateList += `<th>${e.created_at.split(" ")[0]}</th>`
         });
         const data = `<tr>
-            <td>${postData[pd]['kakaotalk_name']}</td>
             <td>${postData[pd]['guaranteed_rank']}</td>
             <td>${postData[pd]['business_number']}</td>
             <td>${postData[pd]['keyword']}</td>
             <td>${postData[pd]['company_name']}</td>
             <td>${postData[pd]['company_number']}</td>
             <td>${postData[pd]['company_phone']}</td>
-            <td><a href=https://map.naver.com/v5/search/%EB%84%A4%EC%9D%B4%EB%B2%84%EC%A7%80%EB%8F%84/place/${postData[pd]['company_code']} target="_blank">${postData[pd]['company_code']}</a></td>
+            <td><a href=https://map.naver.com/v5/search/${postData[pd]['keyword']}/place/${postData[pd]['company_code']} target="_blank">${postData[pd]['company_code']}</a></td>
             ${rankDiv}
         </tr>`
         plcaeList.innerHTML += data;

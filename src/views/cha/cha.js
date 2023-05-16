@@ -8,8 +8,8 @@ window.onload = async function () {
     const query = {
         status: status,
     }
-    let postData = await Api.post('http://localhost:3001/api/getPlace', query);
-    // let postData = await Api.post('http://hmkting.synology.me:3001/api/getPlace', query);
+    // let postData = await Api.post('http://localhost:3001/api/getPlace', query);
+    let postData = await Api.post('http://hmkting.synology.me:3001/api/getPlace', query);
     console.log(postData)
     postData = await postData.reduce((prev, next) => {
         let key = next['id']

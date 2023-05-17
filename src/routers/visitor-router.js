@@ -10,13 +10,11 @@ visitorRouter.post('/setLastRank', async (req, res, next) => {
 		const offset = 1000 * 60 * 60 * 9
 		const today = new Date((new Date()).getTime() + offset);
 		const now = today.toISOString().split('T')[0];
-		console.log(now);
-		// const todaySql = `select * from company_ranking_data where created_at BETWEEN "${now} 00:00:00" AND "${now} 23:59:59" order by count desc`
-		// const data = await mysqlRead.query(todaySql);
-		// const todayNotSql = `delete from company_ranking_data where count != ?`
-		// const todayNotSqlData = await mysqlWrite.query(todayNotSql, [ data[0][0].count ]);
-		res.status(201).json(today);
-		// res.status(201).json(todayNotSqlData[0]);
+		const todaySql = `select * from company_ranking_data where created_at BETWEEN "${now} 00:00:00" AND "${now} 23:59:59" order by count desc`
+		const data = await mysqlRead.query(todaySql);
+		const todayNotSql = `delete from company_ranking_data where count != ? and created_at BETWEEN "${now} 00:00:00" AND "${now} 23:59:59"`
+		const todayNotSqlData = await mysqlWrite.query(todayNotSql, [ data[0][0].count ]);
+		res.status(201).json(todayNotSqlData[0]);
 	} catch (error) {
 		next(error);
 	}

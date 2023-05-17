@@ -2,6 +2,7 @@ import cors from 'cors';
 import express from 'express';
 import cron from 'node-cron';
 import axios from 'axios';
+import { spawn } from 'child_process';
 import {
 	viewsRouter,
 	visitorRouter
@@ -13,19 +14,44 @@ cron.schedule('0 59 23 * * *', async function() {
 	const data = await axios.post('http://hmkting.synology.me:3001/api/setLastRank');
 });
 
+
 // second minute hour day-of-month month day-of-week
-cron.schedule('0 52 10 * * *', async function() {
-	console.log("1")
+cron.schedule('0 0 9 * * *', async function() {
+	const result = spawn('python', ['placeUpdate.py']);
+	// 3. stdout의 'data'이벤트리스너로 실행결과를 받는다.
+	result.stdout.on('data', function (data) {
+		console.log(data.toString());
+	});
+	// 4. 에러 발생 시, stderr의 'data'이벤트리스너로 실행결과를 받는다.
+	result.stderr.on('data', function (data) {
+		console.log(data.toString());
+	});
 });
 
 // second minute hour day-of-month month day-of-week
-cron.schedule('0 53 23 * * *', async function() {
-	console.log("2")
+cron.schedule('0 0 15 * * *', async function() {
+	const result = spawn('python', ['placeUpdate.py']);
+	// 3. stdout의 'data'이벤트리스너로 실행결과를 받는다.
+	result.stdout.on('data', function (data) {
+		console.log(data.toString());
+	});
+	// 4. 에러 발생 시, stderr의 'data'이벤트리스너로 실행결과를 받는다.
+	result.stderr.on('data', function (data) {
+		console.log(data.toString());
+	});
 });
 
 // second minute hour day-of-month month day-of-week
-cron.schedule('0 54 23 * * *', async function() {
-	console.log("3")
+cron.schedule('0 0 18 * * *', async function() {
+	const result = spawn('python', ['placeUpdate.py']);
+	// 3. stdout의 'data'이벤트리스너로 실행결과를 받는다.
+	result.stdout.on('data', function (data) {
+		console.log(data.toString());
+	});
+	// 4. 에러 발생 시, stderr의 'data'이벤트리스너로 실행결과를 받는다.
+	result.stderr.on('data', function (data) {
+		console.log(data.toString());
+	});
 });
 
 const app = express();

@@ -15,7 +15,7 @@ visitorRouter.post('/setLastRank', async (req, res, next) => {
 		// const data = await mysqlRead.query(todaySql);
 		// const todayNotSql = `delete from company_ranking_data where count != ?`
 		// const todayNotSqlData = await mysqlWrite.query(todayNotSql, [ data[0][0].count ]);
-		res.status(201).json(now);
+		res.status(201).json(today);
 		// res.status(201).json(todayNotSqlData[0]);
 	} catch (error) {
 		next(error);

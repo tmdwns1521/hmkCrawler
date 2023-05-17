@@ -10,7 +10,6 @@ window.onload = async function () {
     }
     // let postData = await Api.post('http://localhost:3001/api/getPlace', query);
     let postData = await Api.post('http://hmkting.synology.me:3001/api/getPlace', query);
-    console.log(postData)
     postData = await postData.reduce((prev, next) => {
         let key = next['id']
         if (!prev[key]) {
@@ -28,16 +27,17 @@ window.onload = async function () {
         prev[key]['rank_data'].push({ rank: next['rank'], created_at: next['created_at'], rate: next['rate']})
         return prev
     }, {})
-    console.log(postData);
 
     const plcaeList = document.getElementById('place_list')
-    let dateList;
+    let dateList = {};
     for (const pd in postData) {
         let rankDiv = '';
-        dateList = '';
         postData[pd]['rank_data'].forEach((e) => {
             rankDiv += `<td style="color: ${e.rate}">${e.rank}</td>`
-            dateList += `<th>${e.created_at.split(" ")[0]}</th>`
+            if (dateList[e.created_at.split(" ")[0]] === undefined) {
+                dateList[e.created_at.split(" ")[0]] = 0
+            };
+            dateList[e.created_at.split(" ")[0]] += Number(e.rank)
         });
         const data = `<tr>
             <td>${postData[pd]['guaranteed_rank']}</td>
@@ -52,8 +52,19 @@ window.onload = async function () {
         plcaeList.innerHTML += data;
       }
     const placeListTr = document.getElementById('place_list_tr')
-    placeListTr.innerHTML += dateList
+    let dataListStr = '';
+    for (const da in dateList) {
+        dataListStr += `<th>${da} (${dateList[da]})</th>`
+    }
+    placeListTr.innerHTML += dataListStr
 }
+
+const checkBtn = document.getElementById('checkBtn');
+checkBtn.addEventListener('click', async (e) => {
+    // await Api.post('http://localhost:3001/api/setLastRank');
+    await Api.post('http://hmkting.synology.me:3001/api/setLastRank');
+    window.location.reload();
+})
 
 // // '.tbl-content' consumed little space for vertical scrollbar, scrollbar width depend on browser/os/platfrom. Here calculate the scollbar width .
 // $(window).on("load resize ", function() {

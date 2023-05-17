@@ -13,6 +13,21 @@ cron.schedule('0 59 23 * * *', async function() {
 	const data = await axios.post('http://hmkting.synology.me:3001/api/setLastRank');
 });
 
+// second minute hour day-of-month month day-of-week
+cron.schedule('0 52 10 * * *', async function() {
+	console.log("1")
+});
+
+// second minute hour day-of-month month day-of-week
+cron.schedule('0 53 23 * * *', async function() {
+	console.log("2")
+});
+
+// second minute hour day-of-month month day-of-week
+cron.schedule('0 54 23 * * *', async function() {
+	console.log("3")
+});
+
 const app = express();
 
 // CORS 에러 방지

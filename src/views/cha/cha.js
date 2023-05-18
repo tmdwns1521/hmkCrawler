@@ -66,6 +66,45 @@ checkBtn.addEventListener('click', async (e) => {
     window.location.reload();
 })
 
+const checkBtn2 = document.getElementById('checkBtn2');
+checkBtn2.addEventListener('click', async (e) => {
+    const modalWrap = document.getElementById('modalWrap');
+    modalWrap.style.display = 'block';
+})
+
+const closeBtn = document.getElementById('closeBtn');
+closeBtn.addEventListener('click', async (e) => {
+    const modalWrap = document.getElementById('modalWrap');
+    modalWrap.style.display = 'none';
+})
+
+const createBtn = document.getElementById('createBtn');
+createBtn.addEventListener('click', async (e) => {
+    e.preventDefault();
+    const guaranteedRank = document.getElementById('guaranteedRank').value;
+    const companyNum = document.getElementById('companyNum').value;
+    const keyword = document.getElementById('keyword').value;
+    const companyName = document.getElementById('companyName').value;
+    const companyNumber = document.getElementById('companyNumber').value;
+    const companyPhone = document.getElementById('companyPhone').value;
+    const companyCode = document.getElementById('companyCode').value;
+    const status = document.getElementById('status').value;
+    const data = {
+        guaranteedRank,
+        companyNum,
+        keyword,
+        companyName,
+        companyNumber,
+        companyPhone,
+        companyCode,
+        status
+    }
+    // await Api.post('http://localhost:3001/api/createPlace', data);
+    await Api.post('http://hmkting.synology.me:3001/api/createPlace', data);
+    window.location.reload();
+})
+
+
 // // '.tbl-content' consumed little space for vertical scrollbar, scrollbar width depend on browser/os/platfrom. Here calculate the scollbar width .
 // $(window).on("load resize ", function() {
 //     var scrollWidth = $('.tbl-content').width() - $('.tbl-content table').width();

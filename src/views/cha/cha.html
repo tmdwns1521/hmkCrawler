@@ -10,9 +10,55 @@
 <body>
   <section>
     <!--for demo wrap-->
+    <div id="modalWrap">
+        <div id="modalBody">
+          <span id="closeBtn">&times;</span>
+          <div class="wrapper">
+            <form>
+              <div class="group">
+                <input id="guaranteedRank" type="text"/><span class="highlight"></span><span class="bar"></span>
+                <label>보장순위</label>
+              </div>
+              <div class="group">
+                <input id="companyNum" type="text"/><span class="highlight"></span><span class="bar"></span>
+                <label>사업자</label>
+              </div>
+              <div class="group">
+                <input id="keyword" type="text" required="required"/><span class="highlight"></span><span class="bar"></span>
+                <label>키워드</label>
+              </div>
+              <div class="group">
+                <input id="companyName" type="text" required="required"/><span class="highlight"></span><span class="bar"></span>
+                <label>업체명</label>
+              </div>
+              <div class="group">
+                <input id="companyNumber" type="text"/><span class="highlight"></span><span class="bar"></span>
+                <label>업체전화번호</label>
+              </div>
+              <div class="group">
+                <input id="companyPhone" type="text"/><span class="highlight"></span><span class="bar"></span>
+                <label>사장번호</label>
+              </div>
+              <div class="group">
+                <input id="companyCode" type="text" required="required"/><span class="highlight"></span><span class="bar"></span>
+                <label>지도번호</label>
+              </div>
+              <div class="group">
+                <input id="status" type="text" required="required"/><span class="highlight"></span><span class="bar"></span>
+                <label>업체상태</label>
+              </div>
+              <div class="btn-box">
+                <button class="btn btn-submit" id="createBtn">등록</button>
+                <!-- <button class="btn btn-cancel" type="button">cancel</button> -->
+              </div>
+            </form>
+          </div>
+        </div>
+    </div>
     <h1>DS COMPANY</h1>
     <div class="btn-container">
-      <a id="checkBtn" class="btn-3d red">CHECK</a></a>
+      <a id="checkBtn" class="btn-3d red">CHECK</a>
+      <a id="checkBtn2" class="btn-3d red">업체 등록</a>
     </div>
     <!-- <div class="tbl-header">
       <table cellpadding="0" cellspacing="0" border="0">
@@ -40,7 +86,7 @@
             <th>업체명</th>
             <th>업체전화번호</th>
             <th>사장번호</th>
-            <th>링크주소</th>
+            <th>지도번호</th>
           </tr>
         </thead>
         <tbody id="place_list">

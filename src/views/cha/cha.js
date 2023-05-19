@@ -168,7 +168,7 @@ downloadBtn.addEventListener('click', async (e) => {
     console.log(datas);
     
       
-    downloadExcelFile(datas, 'new.csv');
+    downloadExcelFile(datas, `${code}.csv`);
     
 })
 

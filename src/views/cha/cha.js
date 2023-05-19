@@ -1,6 +1,29 @@
 
 import * as Api from '/api.js';
 
+function downloadExcelFile(data, filename) {
+    const csvContent = "data:text/csv;charset=utf-8," + data.map(row => row.join(",")).join("\n");
+    const encodedUri = encodeURI(csvContent);
+    const link = document.createElement("a");
+    link.setAttribute("href", encodedUri);
+    link.setAttribute("download", filename);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+}
+
+function getDatesStartToLast(startDate, lastDate) {
+    var regex = RegExp(/^\d{4}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$/);
+    if(!(regex.test(startDate) && regex.test(lastDate))) return "Not Date Format";
+    var result = [];
+    var curDate = new Date(startDate);
+    while(curDate <= new Date(lastDate)) {
+        result.push(curDate.toISOString().split("T")[0]);
+        curDate.setDate(curDate.getDate() + 1);
+    }
+    return result;
+}
+
 window.onload = async function () {
     let params = window.location.href;
     params = params.split("/");
@@ -104,6 +127,50 @@ createBtn.addEventListener('click', async (e) => {
     window.location.reload();
 })
 
+const downloadBtn = document.getElementById('downloadBtn');
+downloadBtn.addEventListener('click', async (e) => {
+    e.preventDefault();
+    const start = document.getElementById('start').value;
+    const end = document.getElementById('end').value;
+    const code = document.getElementById('placeCode').value.trim();
+    const data = {
+        start,
+        end,
+        code
+    }
+    
+
+    const datas = [];
+
+    const dateDatas = getDatesStartToLast(start, end)
+    dateDatas.reverse();
+    dateDatas.unshift('키워드')
+    datas.push(dateDatas);
+
+
+    // const Newdata = await Api.post('http://localhost:3001/api/getPlaceDate', data);
+    await Api.post('http://hmkting.synology.me:3001/api/getPlaceDate', data);
+
+
+    const keyword_name = {}
+    for (const i of Newdata) {
+        try {
+            keyword_name[i.keyword].push(i.rank);
+        } catch (e) {
+            keyword_name[i.keyword] = [];
+            keyword_name[i.keyword].push(i.keyword);
+            keyword_name[i.keyword].push(i.rank);
+        }
+    }
+    for (const i in keyword_name) {
+        datas.push(keyword_name[i]);
+    }
+    console.log(datas);
+    
+      
+    downloadExcelFile(datas, 'new.csv');
+    
+})
 
 // // '.tbl-content' consumed little space for vertical scrollbar, scrollbar width depend on browser/os/platfrom. Here calculate the scollbar width .
 // $(window).on("load resize ", function() {

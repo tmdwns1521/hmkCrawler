@@ -76,4 +76,17 @@ visitorRouter.post('/createPlace', async (req, res, next) => {
 	}
 });
 
+
+visitorRouter.post('/getPlaceDate', async (req, res, next) => {
+	try {
+		const { start, end, code } = req.body;
+		const sql = `SELECT * FROM company_ranking_data WHERE code = ? AND created_at BETWEEN "${start} 00:00:00" AND "${end} 23:59:59" order by created_at desc`
+		const data = await mysqlRead.query(sql, [ code ]);
+		res.status(201).json(data[0]);
+	} catch (error) {
+		next(error);
+	}
+});
+
+
 export { visitorRouter };

@@ -374,17 +374,40 @@ textarea {
   resize: none;
 }
 
+.code {
+  color: white;
+  width: 120px;
+  padding-bottom: 25px;
+  margin-left: 75px;
+}
+::placeholder {
+  color: white; /* 원하는 색상으로 변경 */
+}
+
+.datetimeN {
+  font-weight: 600;
+  width: 130px;
+  border: none;
+  margin-left: 10px;
+  margin-right: 15px;
+  color: darkred;
+  background: #e74c3c;
+  height: 45px;
+  border-radius: 10px;
+  box-shadow: 0 0 0 1px #c63702 inset, 0 0 0 2px rgba(255,255,255,0.15) inset, 0 8px 0 0 #C24032, 0 8px 0 1px rgba(0,0,0,0.4), 0 8px 8px 1px rgba(0,0,0,0.5);
+}
 input,
 textarea {
   background: none;
   color: #c6c6c6;
   font-size: 18px;
   padding: 10px 10px 10px 5px;
-  display: block;
   width: 320px;
   border: none;
   border-radius: 0;
   border-bottom: 1px solid #c6c6c6;
+  position: relative;
+  display: inline-block;
 }
 input:focus,
 textarea:focus {

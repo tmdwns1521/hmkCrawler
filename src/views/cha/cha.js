@@ -149,7 +149,7 @@ downloadBtn.addEventListener('click', async (e) => {
 
 
     // const Newdata = await Api.post('http://localhost:3001/api/getPlaceDate', data);
-    await Api.post('http://hmkting.synology.me:3001/api/getPlaceDate', data);
+    const Newdata = await Api.post('http://hmkting.synology.me:3001/api/getPlaceDate', data);
 
 
     const keyword_name = {}

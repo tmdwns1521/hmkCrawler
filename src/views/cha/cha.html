@@ -6,6 +6,73 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <link rel="stylesheet" href="cha.css">
+  <script>
+    let sort = 'red';
+    function sortTable(columnIndex) {
+      console.log(sort);
+      if (sort === 'red') {
+        var table, rows, switching, i, x, y, shouldSwitch;
+        table = document.getElementById("myTable");
+        switching = true;
+        while (switching) {
+          switching = false;
+          rows = table.rows;
+          for (i = 1; i < (rows.length - 1); i++) {
+            shouldSwitch = false;
+            x = rows[i].getElementsByTagName("td")[columnIndex];
+            y = rows[i + 1].getElementsByTagName("td")[columnIndex];
+            
+            var xStyle = x.getAttribute("style");
+            var yStyle = y.getAttribute("style");
+            
+            var isRedX = xStyle && xStyle.includes("color: red");
+            
+            var isRedY = yStyle && yStyle.includes("color: red");
+            
+            if (!(isRedX) && (isRedY)) {
+              shouldSwitch = true;
+              break;
+            }
+          }
+          if (shouldSwitch) {
+            rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+            switching = true;
+          }
+        }
+        sort = 'blue';
+      } else if (sort === 'blue') {
+        var table, rows, switching, i, x, y, shouldSwitch;
+        table = document.getElementById("myTable");
+        switching = true;
+        while (switching) {
+          switching = false;
+          rows = table.rows;
+          for (i = 1; i < (rows.length - 1); i++) {
+            shouldSwitch = false;
+            x = rows[i].getElementsByTagName("td")[columnIndex];
+            y = rows[i + 1].getElementsByTagName("td")[columnIndex];
+            
+            var xStyle = x.getAttribute("style");
+            var yStyle = y.getAttribute("style");
+            
+            var isRedX = xStyle && xStyle.includes("color: blue");
+            
+            var isRedY = yStyle && yStyle.includes("color: blue");
+            
+            if (!(isRedX) && (isRedY)) {
+              shouldSwitch = true;
+              break;
+            }
+          }
+          if (shouldSwitch) {
+            rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+            switching = true;
+          }
+        }
+        sort = 'red';
+      }  
+    }
+  </script>
 </head>
 <body>
   <section>
@@ -64,7 +131,7 @@
           class="datetimeN"
           type="date"
           name="partydate"
-          style="color: white;"
+          style="color: white; margin-left: 600px;"
            />
         <input
           id="end"
@@ -93,7 +160,7 @@
       </table>
     </div> -->
     <div class="tbl-content">
-      <table cellpadding="0" cellspacing="0" border="0">
+      <table cellpadding="0" cellspacing="0" border="0" id="myTable">
         <thead>
           <tr id="place_list_tr">
             <th>보장순위</th>

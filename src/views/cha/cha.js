@@ -1,6 +1,7 @@
 
 import * as Api from '/api.js';
 
+
 function downloadExcelFile(data, filename) {
     const csvContent = "data:text/csv;charset=utf-8," + data.map(row => row.join(",")).join("\n");
     const encodedUri = encodeURI(csvContent);
@@ -76,8 +77,10 @@ window.onload = async function () {
       }
     const placeListTr = document.getElementById('place_list_tr')
     let dataListStr = '';
+    let n = 7
     for (const da in dateList) {
-        dataListStr += `<th>${da} (${dateList[da]})</th>`
+        dataListStr += `<th onclick="sortTable(${n})">${da} (${dateList[da]})</th>`
+        n += 1;
     }
     placeListTr.innerHTML += dataListStr
 }
@@ -165,12 +168,15 @@ downloadBtn.addEventListener('click', async (e) => {
     for (const i in keyword_name) {
         datas.push(keyword_name[i]);
     }
-    console.log(datas);
     
       
     downloadExcelFile(datas, `${code}.csv`);
     
 })
+
+
+
+
 
 // // '.tbl-content' consumed little space for vertical scrollbar, scrollbar width depend on browser/os/platfrom. Here calculate the scollbar width .
 // $(window).on("load resize ", function() {
